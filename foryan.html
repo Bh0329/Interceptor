@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting to Twitch</title>
+
+  <script>
+    // GitHub Pages serves static files, so POST directly to the deployed Apps Script /exec URL.
+    const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbx7qQdWAT3tsb0L8HxF1OeB-vz1rq5zTvkr2WzehJa2K7zasiASHmkoAn1SUf_gwhNAYg/exec';
+    const linkSource = 'Direct_Click';
+
+    // Apps Script parses the JSON body from e.postData.contents.
+    // The text/plain header avoids a cross-origin preflight.
+    fetch(appsScriptUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      credentials: 'omit',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      keepalive: true,
+      body: JSON.stringify({
+        link_source: linkSource,
+        user_context: 'yyannderr_stream'
+      })
+    }).catch((error) => {
+      console.error('Could not send the redirect log:', error);
+    });
+  </script>
+
+  <meta http-equiv="refresh" content="0; url=https://www.twitch.tv/yyannderr">
+</head>
+<body>
+  <a href="https://www.twitch.tv/yyannderr">Continue to Twitch</a>
+</body>
+</html>
